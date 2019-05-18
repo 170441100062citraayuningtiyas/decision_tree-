@@ -1,0 +1,765 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="K-Mean Clustering">
+      
+      
+        <link rel="canonical" href="https://github.com/citra ayuningtiyas/getting-started/">
+      
+      
+        <meta name="author" content="citra ayuningtiyas">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.2.0">
+    
+    
+      
+        <title>Decision Tree - DATA MINING</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application.750b69bd.css">
+      
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.224b79ff.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#3f51b5">
+      
+    
+    
+      <script src="../assets/javascripts/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../assets/fonts/material-icons.css">
+    
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "None", "auto")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="__github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#decision-tree" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://github.com/citra ayuningtiyas" title="DATA MINING" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              DATA MINING
+            </span>
+            <span class="md-header-nav__topic">
+              Decision Tree
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/citraayu" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    citraayuningtiyas/data_mining
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+<nav class="md-tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href=".." title="k-mean-clustering-dan-K-Nearest" class="md-tabs__link md-tabs__link--active">
+        k-mean-clustering-dan-K-Nearest
+      </a>
+    
+  </li>
+
+      
+        
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://github.com/citra ayuningtiyas" title="DATA MINING" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    DATA MINING
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/citraayu" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    citraayuningtiyas/data_mining
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../authors-notes/" title="Biodata" class="md-nav__link">
+      Biodata
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="k-mean-clustering-dan-K-Nearest" class="md-nav__link">
+      k-mean-clustering-dan-K-Nearest
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Decision Tree
+      </label>
+    
+    <a href="./" title="Decision Tree" class="md-nav__link md-nav__link--active">
+      Decision Tree
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#latar-belakang-decision-tree" title="Latar Belakang Decision Tree" class="md-nav__link">
+    Latar Belakang Decision Tree
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decision-tree_1" title="Decision Tree" class="md-nav__link">
+    Decision Tree
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#manfaat-decision-tree" title="Manfaat Decision Tree" class="md-nav__link">
+    Manfaat Decision Tree
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#model-decision-tree" title="Model Decision Tree" class="md-nav__link">
+    Model Decision Tree
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#konsep-decision-tree" title="Konsep Decision Tree" class="md-nav__link">
+    Konsep Decision Tree
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kelebihan-decision-tree" title="Kelebihan Decision Tree" class="md-nav__link">
+    Kelebihan Decision Tree
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kekurangan-decision-tree" title="Kekurangan Decision Tree" class="md-nav__link">
+    Kekurangan Decision Tree
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementasi" title="Implementasi" class="md-nav__link">
+    Implementasi
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implementasi-classification-tree" title="[ Implementasi : Classification Tree ]" class="md-nav__link">
+    [ Implementasi : Classification Tree ]
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#latar-belakang-decision-tree" title="Latar Belakang Decision Tree" class="md-nav__link">
+    Latar Belakang Decision Tree
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decision-tree_1" title="Decision Tree" class="md-nav__link">
+    Decision Tree
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#manfaat-decision-tree" title="Manfaat Decision Tree" class="md-nav__link">
+    Manfaat Decision Tree
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#model-decision-tree" title="Model Decision Tree" class="md-nav__link">
+    Model Decision Tree
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#konsep-decision-tree" title="Konsep Decision Tree" class="md-nav__link">
+    Konsep Decision Tree
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kelebihan-decision-tree" title="Kelebihan Decision Tree" class="md-nav__link">
+    Kelebihan Decision Tree
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kekurangan-decision-tree" title="Kekurangan Decision Tree" class="md-nav__link">
+    Kekurangan Decision Tree
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementasi" title="Implementasi" class="md-nav__link">
+    Implementasi
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implementasi-classification-tree" title="[ Implementasi : Classification Tree ]" class="md-nav__link">
+    [ Implementasi : Classification Tree ]
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="decision-tree"><strong>Decision Tree</strong><a class="headerlink" href="#decision-tree" title="Permanent link">&para;</a></h1>
+<h2 id="latar-belakang-decision-tree"><strong>Latar Belakang Decision Tree</strong><a class="headerlink" href="#latar-belakang-decision-tree" title="Permanent link">&para;</a></h2>
+<p>Sebagai manusia, kita akan selalu dihadapkan pada sebuah masalah. Masalah-masalah yang dihadapi oleh manusia mempunyai tingkat kesulitan dan kompleksitasnya yang sangat bervariasi. Mulai dari yang sederhana dengan sedikit faktor-faktor yang berkaitan dengan masalah, sampai dengan masalah yang sangat rumit dengan banyak sekali faktor yang turut serta berkaitan dengan masalah tersebut serta perlu untuk diperhitungkan.</p>
+<p>Dalam menghadapi masalah-masalah tersebut, manusia mulai mengembangkan sebuah sistem yang dapat membantu agar dapat dengan mudah mampu untuk menyelesaikan masalah-masalahnya. Salah satunya dalah <strong>Decision Tree (pohon keputusan)</strong>. Adapun <strong>Decision Tree</strong> ini adalah sebuah jawaban akan sebuah sistem yang manusia kembangkan untuk membantu mencari dan membuat keputusan untuk masalah-masalah tersebut dan dengan memperhitungkan berbagai macam faktor yang ada di dalam lingkup masalah tersebut.</p>
+<p>Dengan pohon keputusan, manusia dapat dengan mudah melihat mengidentifikasi dan melihat hubungan antara faktor-faktor yang mempengaruhi suatu masalah dan dapat mencari penyelesaian terbaik dengan memperhitungkan faktor-faktor tersebut. Peranan pohon keputusan ini sebagai alat Bantu dalam mengambil keputusan <strong>(decision support tool)</strong> telah dikembangkan oleh manusia sejak perkembangan teori pohon yang dilandaskan pada teori graf</p>
+<h2 id="decision-tree_1"><strong>Decision Tree</strong><a class="headerlink" href="#decision-tree_1" title="Permanent link">&para;</a></h2>
+<p><strong><em>Decision tree</em></strong> salah satu metode klasifikasi yang paling populer, sebab mudah untuk diimplemetasikan oleh <strong>user</strong>. Setiap orang bahkan disebuah perusahaan, tentu menginginkan sebuah pengambilan keputusan yang tepat dan efisien. Banyak perusahaan yang membutuhkan media seperti <strong><em>Business Intellegence</em></strong> guna mencapai pengambilan keputusan yang di inginkan. Disinilah, penggunaan dari <strong>Decision tree</strong> itu sangat dibutuhkan.</p>
+<p><img alt="Material for mkdocs" src="../assets/images/D001.png" /></p>
+<p><strong><em>Decision tree</em></strong> <em>(pohon keputusan)</em> adalah model prediksi menggunakan struktur pohon atau struktur berhirarki. Mengubah data menjadi <strong><em>decision tree</em></strong> dan aturan-aturan keputusan.</p>
+<h2 id="manfaat-decision-tree"><strong>Manfaat Decision Tree</strong><a class="headerlink" href="#manfaat-decision-tree" title="Permanent link">&para;</a></h2>
+<p>Manfaat utama dari penggunaan pohon keputusan adalah kemampuannya untuk mem-<strong>break down</strong> proses pengambilan keputusan yang kompleks menjadi lebih simple. Dengan itu, pengambil keputusan akan lebih menyelesaikan solusi dari permasalahan.</p>
+<p><strong>Decision tree</strong> juga berguna untuk mengeksplorasi data, menemukan hubungan tersembunyi antara sejumlah calon variabel input dengan sebuah variabel target. Memadukan antara eksplorasi data dan pemodelan, sehingga sangat bagus sebagai langkah awal dalam proses pemodelan bahkan ketika dijadikan sebagai model akhir dari beberapa teknik lain.</p>
+<h2 id="model-decision-tree"><strong>Model Decision Tree</strong><a class="headerlink" href="#model-decision-tree" title="Permanent link">&para;</a></h2>
+<p>Model dari <strong>Decision Tree</strong> ini menggunakan struktur pohon atau struktur berhirarki untuk prediksinya. </p>
+<p>Contoh dari pohon keputusan dapat dilihat di gambar berikut ini :</p>
+<p><img alt="Material for mkdoc" src="../assets/images/a1.JPG" /></p>
+<p>Disini setiap percabangan menyatakan kondisi yang harus dipenuhi dan tiap ujung pohon menyatakan <strong>class</strong> data. Gambar di atas adalah identifikasi pembeli computer dari pohon keputusan tersebut diketahui bahwa salah satu kelompok yang potensial membeli komputer adalah orang yang berusia di bawah 30 tahun dan juga pelajar. Setelah sebuah <strong>Decision Tree</strong> dibangun maka dapat digunakan untuk mengklasifikasikan <strong><em>record</em></strong> yang belum ada kelasnya.</p>
+<p>Pertama dari <strong><em>node root</em></strong>, menggunakan tes terhadap atribut dari <strong><em>record</em></strong> yang belum ada kelasnya tersebut lalu mengikuti cabang yang sesuai dengan hasil dari tes tersebut. Hasil tersebut akan membawa kepada <strong><em>internal node</em></strong> (memiliki satu cabang masuk dan dua atau lebih cabang yang keluar), dengan cara harus melakukan tes lagi terhadap atribut atau <strong><em>node</em></strong> daun. <strong><em>Record</em></strong> yang kelasnya tidak diketahui kemudian diberikan <strong>class</strong> yang sesuai dengan kelas yang ada pada <strong><em>node</em></strong> daun.</p>
+<p>Pada pohon keputusan setiap simpul daun menandai label <strong>class</strong>. Proses dalam pohon keputusan yaitu mengubah bentuk data (tabel) menjadi model <strong><em>tree</em></strong> kemudian mengubah model pohon tersebut menjadi aturan <strong><em>rule</em></strong>.</p>
+<p><strong>Tree</strong> dibangun dengan cara membagi data secara rekursif hingga tiap bagian terdiri dari data yang berasal dari kelas yang sama. Bentuk pemecahan <strong>(split)</strong> yang digunakan untuk membagi data tergantung dari jenis atribut yang digunakan dalam <strong><em>split**</em></strong>.**</p>
+<p><strong><em>Split</em></strong> untuk atribut numerik yaitu mengurutkan contoh berdasarkan atribut kontiyu A, kemudian membentuk minimum permulaan <strong><em>(threshold**</em></strong>)** M dari contoh-contoh yang ada dari kelas mayoritas pada setiap partisi yang bersebelahan, lalu menggabungkan partisi-partisi yang bersebelahan tersebut dengan kelas mayoritas yang sama. </p>
+<p><strong><em>Split</em></strong> untuk atribut diskret <em>A</em> mempunyai bentuk :</p>
+<pre class="codehilite"><code>value (A) ε X dimana X ⊂ domain(A)</code></pre>
+
+<p>Untuk melakukan pemisahan obyek <strong>(split)</strong> dilakukan tes terhadap atribut dengan mengukur tingkat ketidakmurnian pada sebuah simpul <strong>(node).</strong> </p>
+<p><strong>Gain ratio</strong> (rasio pemulihan) ada pada algoritma C.45. Sebelum menghitung rasio perolehan, perlu menghitung dulu nilai informasi dalam satuan bits dari suatu kumpulan objek. </p>
+<p>Cara menghitungnya dilakukan dengan menggunakan konsep <strong>entropi</strong> :</p>
+<p><img alt="Material for mkdocs" src="../assets/images/b2.JPG" /></p>
+<p><strong>Keterangan :</strong></p>
+<p><strong>S</strong>  = ruang (data) sampel yang digunakan untuk pelatihan</p>
+<p><strong>p+</strong> = jumlah yang bersolusi positif atau mendukung pada data sampel untuk kriteria tertentu</p>
+<p><strong>p-</strong>  = jumlah yang bersolusi negatif atau tidak mendukung pada data sampel untuk kriteria tertentu.</p>
+<p><strong>Entropi(S)</strong> sama dengan 0, jika semua contoh pada S berada dalam kelas yang sama. </p>
+<p><strong>Entropi(S)</strong> sama dengan 1, jika jumlah contoh positif dan negative dalam S adalah sama. </p>
+<p><strong>Entropi(S)</strong> lebih dari 0 tetapi kurang dari 1, jika jumlah contoh positif dan negative dalam S tidak sama. </p>
+<p><strong>Entropi split</strong> yang membagi <em>S</em> dengan <em>n</em> <strong>record</strong> menjadi himpunan-himpunan <em>S1</em> dengan <em>n1</em> baris dan <em>S2</em> dengan <em>n2</em> baris adalah :</p>
+<p><img alt="Material for mkdocs" src="../assets/images/c.JPG" /></p>
+<p>Kemudian menghitung perolehan informasi dari <strong>output</strong> data atau <strong>variabel dependent y</strong> yang dikelompokkan berdasarkan atribut A, dinotasikan dengan <strong><em>gain</em></strong> <strong>(y,A)</strong>. Perolehan informasi*,* <strong><em>gain</em></strong> <strong>(y,A)</strong>,
+dari <strong>atribut A relative</strong> terhadap <strong>output data y</strong> adalah :</p>
+<p><img alt="Material for mkdocs" src="../assets/images/d.JPG" /></p>
+<p>Keterangan :</p>
+<p><strong>Nilai (A)</strong> =  semua nilai yang mungkin dari atribut A</p>
+<p><strong>yc</strong> = subset dari y dimana A mempunyai nilai c.</p>
+<p><strong>Term</strong> pertama dalam persamaan diatas adalah <strong><em>entropy</em></strong> total <em>y</em> dan term kedua adalah <strong>entropy</strong> sesudah dilakukan pemisahan data berdasarkan atribut A.</p>
+<p>Untuk menghitung rasio perolehan perlu diketahui suatu term baru yang disebut pemisahan informasi **(SplitInfo). **</p>
+<p>Pemisahan informasi dihitung dengan cara :</p>
+<p><img alt="Material for mkdoca" src="../assets/images/e.JPG" /></p>
+<p><em>S1</em> sampai <em>Sc</em> adalah <strong>c</strong> subset yang dihasilkan dari pemecahan <em>S</em> dengan menggunakan atribut A yang mempunyai sebanyak <em>c</em> nilai. Selanjutnya rasio perolehan <strong>(gain ratio)</strong> dihitung dengan cara :</p>
+<p><img alt="Material for mkdocs" src="../assets/images/f.JPG" /></p>
+<h2 id="konsep-decision-tree"><strong>Konsep Decision Tree</strong><a class="headerlink" href="#konsep-decision-tree" title="Permanent link">&para;</a></h2>
+<p>Nama lain dari <strong><em>decision tree</em></strong> adalah <strong>CART (Classification and Regression Tree).</strong> Dimana metode ini merupakan gabungan dari dua jenis pohon, yaitu <strong><em>classification tree</em></strong> dan juga <strong>regression tree.</strong></p>
+<p>Untuk memudahkan, berikut ilustrasi dari keduanya :</p>
+<p><img alt="Material for mkdocs" src="../assets/images/d1.JPG" /></p>
+<p>Gambar diatas merupakan contoh dari <strong>classification tree</strong>, sedangkan untuk contoh dari <strong>regression
+tree</strong> ada dibawah ini :</p>
+<p><img alt="Material for mkdocs" src="../assets/images/d2.JPG" />Dalam beberapa aplikasi, akurasi dari sebuah klasifikasi atau prediksi adalah satu-satunya hal yang ditonjolkan dalam metode ini, misalnya sebuah perusahaan <strong><em>direct mail</em></strong> membuat sebuah model yang akurat untuk memprediksi anggota mana yang berpotensi untuk merespon permintaan, tanpa memperhatikan bagaimana atau mengapa model tersebut bekerja.</p>
+<p><img alt="Material for mkdocs" src="../assets/images/d3.JPG" /></p>
+<h2 id="kelebihan-decision-tree"><strong>Kelebihan Decision Tree</strong><a class="headerlink" href="#kelebihan-decision-tree" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Menghilangkan perhitungan-perhitungan yang tidak dibutuhkan. Sample yang diuji hanya berdasarkan kriteria atau sesuai dengan kelas tertentu.</li>
+<li>Pengambilan keputusan yang sebelumnya kompleks dan sangat global diubah menjadi lebih simpel dan spesifik.</li>
+<li>Metode ini menghindari munculnya permasalahan-permaslahan. Dengan cara menggunakan kriteria yang jumlahnya lebih sedikit pada setiap node internal tanpa banyak mengurangi kualitas keputusan yang dihasilkan.</li>
+<li>Bersifat fleksibel. Kefleksibelan metode ini meningkatkan kualitas keputusan yang dihasilkan.</li>
+<li>Memilih fitur dari internal node yang berbeda, fitur yang terpilih akan membedakan suatu kriteria dibandingkan kriteria yang lain dalam node yang sama.</li>
+</ul>
+<h2 id="kekurangan-decision-tree"><strong>Kekurangan Decision Tree</strong><a class="headerlink" href="#kekurangan-decision-tree" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p>Kesulitan dalam mendesain pohon keputusan yang optimal.</p>
+</li>
+<li>
+<p>Hasil kualitas keputusan yang didapatkan dari metode pohon keputusan sangat tergantung pada bagaimana pohon tersebut didesain.</p>
+</li>
+<li>
+<p>Terjadi overlap. Hal ini sering terjadi ketika menggunakan kelas-kelas dan kriteria yang digunakan dalam jumlah besar. Hal tersebut juga dapat menyebabkan meningkatnya waktu pengambilan keputusan dan jumlah memori yang diperlukan.</p>
+</li>
+<li>
+<p>Pengakumulasian jumlah eror dari setiap tingkat dalam sebuah pohon keputusan yang besar.</p>
+</li>
+</ul>
+<h2 id="implementasi"><strong>Implementasi</strong><a class="headerlink" href="#implementasi" title="Permanent link">&para;</a></h2>
+<p><strong><em>Decision tree</em></strong> atau gabungan dari <strong>Classification and Regression Tree.</strong>  Di sini, kita akan mencoba mengimplematasikan dari salah satu penggabungan itu, yaitu <strong>Classification</strong> menggunakan <strong>python</strong> dan beberapa <strong>libary</strong>.</p>
+<h3 id="implementasi-classification-tree"><strong>[ Implementasi : Classification Tree ]</strong><a class="headerlink" href="#implementasi-classification-tree" title="Permanent link">&para;</a></h3>
+<hr />
+<p>Classification Tree ini menggunakan data :</p>
+<p><strong>pima-indians-diabetes.cvs</strong> (bisa di unduh : <a href="https://www.kaggle.com/uciml/pima-indians-diabetes-database">https://www.kaggle.com/uciml/pima-indians-diabetes-database</a>).</p>
+<p>Data tersebut jadikan satu folder dengan file <strong>pyCharm</strong> atau programnya.</p>
+<p><img alt="Material for mkdocs" src="../assets/images/data.JPG" /></p>
+<p><strong>Langkah 1 :</strong> </p>
+<p>Sebelum menuliskan <strong>source code</strong>, kita harus menginstall <strong>library</strong> terlebih dahulu. Dalam implementasi <strong>Classification Tree</strong>, perlu <strong>library</strong> <strong>pandas</strong> dan <strong>scikit_learn</strong>. Cara menginstallnya, ketikan code dibawah ini kedalam <strong>command prompt</strong> :</p>
+<pre class="codehilite"><code>pip install pandas</code></pre>
+
+<pre class="codehilite"><code>pip install scikit-learn</code></pre>
+
+<p><strong>Langkah 2 :</strong></p>
+<p>Setelah <strong>libary</strong> terpasang, saatnya kita mulai mengetikan programnya. Pertama adalah <strong>load libaries</strong> atau impor, seperti pada <strong>source code</strong> dibawah ini :</p>
+<pre class="codehilite"><code>#load libaries
+
+import pandas as pd
+from sklearn import tree
+from sklearn.tree import DecisionTreeClassifier #Import Decision Tree Classifier
+from sklearn.model_selection import train_test_split #Import train_test_split function
+from sklearn import metrics #Import scikit-learn metrics module for accuracy calculation</code></pre>
+
+<p>Menjalankan <strong>library</strong> yang telah kita pasang atau install melalui <strong>command prompt</strong>. (langkah 1)</p>
+<p>Import Decision Tree Classifier  : Impor Klasifikasi Pohon Keputusan</p>
+<p>Import train_test_split function    : Impor fungsi train_test_split</p>
+<p>Import scikit-learn metrics module for accuracy calculation : Import scikit-learn metrik untuk modul perhitungan akurasi</p>
+<p><strong>Langkah 3 :</strong></p>
+<p>Tahap selanjutnya adalah <strong>col_names</strong> , memberikan nama pada tabel di dalamdata :</p>
+<pre class="codehilite"><code>col_names = ['pregnant', 'glucose', 'bp', 'skin', 'insulin', 'bmi', 'pedigree', 'age', 'label']</code></pre>
+
+<p><strong>Langkah 4</strong> :</p>
+<p>Memasuki langkah keempat adalah tahap <strong>load dataset</strong> (memuat database). Bisa ketikan <strong>source code</strong> seperti pada gambar dibawah ini :</p>
+<pre class="codehilite"><code># load dataset
+pima = pd.read_csv("pima-indians-diabetes.csv", header=None, names=col_names)
+pima.head()</code></pre>
+
+<p><strong>Langkah 5 :</strong></p>
+<p>Selanjutnya adalah  <strong>Feature Selection</strong> (pemilihan fitur), tahap <strong>split dataset in features and target variable</strong> atau memisahkan dataset dalam fitur dan variabel target. Dengan <strong>source code</strong> seperti berikut :</p>
+<pre class="codehilite"><code>#split dataset in features and target variable
+feature_cols = ['pregnant', 'insulin', 'bmi', 'age','glucose','bp','pedigree']
+X = pima[feature_cols] # Features
+y = pima.label # Target variable</code></pre>
+
+<p><strong>Langkah 6 :</strong></p>
+<p>Tahap kelima adalah memasukan <strong>Split dataset into training set and test set</strong> yaitu memisahkan dataset dalam fitur dan variabel target. Tahap ini masih sama yaitu tahap <strong>Feature Selection</strong> :</p>
+<pre class="codehilite"><code># Split dataset into training set and test set
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=1) # 70% training and 30% test</code></pre>
+
+<p><a class="magiclink magiclink-github magiclink-issue" href="https://github.com/squidfunk/mkdocs-material/issues/70" title="GitHub Issue: squidfunk/mkdocs-material#70">#70</a>% training and 30% test : 70% data dari <strong>bill_authentication.csv</strong> adlah data training dan 30% dalah data tes</p>
+<p><strong>Langkah 7 :</strong></p>
+<p>Selanjutnya adalah tahap <strong>Create Decision Tree classifer object</strong>, yaitu tahap membuat objek classifier <strong>Desicion tree</strong>. Berikut adalah <strong>Source code</strong> nya  :</p>
+<pre class="codehilite"><code># Create Decision Tree classifer object
+clf_gini = DecisionTreeClassifier()</code></pre>
+
+<p>**Langkah 8 : **</p>
+<p>Tahap ketujuh adalah proses <strong>Train Decision Tree Classifer</strong>, dengan cara yang sama, memasukkan <strong>source code</strong> dibawah ini :</p>
+<pre class="codehilite"><code># Train Decision Tree Classifer
+clf_gini = clf_gini.fit(X_train,y_train)</code></pre>
+
+<p><strong>Langkah 9 :</strong></p>
+<p>Kemudian tahap prediksi pada dataset yang diuji, atau biasa disebut dengan <strong>Predict the response for test dataset</strong> :</p>
+<pre class="codehilite"><code>#Predict the response for test dataset
+y_pred = clf_gini.predict(X_test)</code></pre>
+
+<p><strong>Langkah 10 :</strong></p>
+<p>Tahap terakhir adalah model <strong>accuracy</strong>. Dimana pada tahap ini dicek <strong>accuracy</strong> pada data tersebut :</p>
+<pre class="codehilite"><code># Model Accuracy, how often is the classifier correct?
+print("Accuracy:",metrics.accuracy_score(y_test, y_pred));</code></pre>
+
+<p><strong>[ Hasil Implementasi ]</strong></p>
+<p>Dan berikut adalah hasil dari <strong>Algorithm Classification tree</strong> :</p>
+<pre class="codehilite"><code>Accuracy: 0.6623376623376623
+
+Process finished with exit code 0</code></pre>
+
+<p>Jadi, <strong>accuracy</strong> dari <strong>Algorithm Classification tree</strong> dengan data : <strong>bill_authentication.csv</strong> adalah 6,6%. Sehingga dapat di ambil kesimpulan bahwa data <strong>accurasy</strong> tersebut standart.</p>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href=".." title="k-mean-clustering-dan-K-Nearest" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                k-mean-clustering-dan-K-Nearest
+              </span>
+            </div>
+          </a>
+        
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2016 - 2019 citraayu
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../assets/fonts/font-awesome.css">
+    
+      <a href="https://webcitra.000webhostapp.com/" class="md-footer-social__link fa fa-globe"></a>
+    
+      <a href="https://github.com/citraayu" class="md-footer-social__link fa fa-github-alt"></a>
+    
+      <a href="https://instagram.com/citra" class="md-footer-social__link fa fa-instagram"></a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application.8c0d971c.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
+      
+    
+  </body>
+</html>
